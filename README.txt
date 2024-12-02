@@ -1,5 +1,5 @@
 # Bound 2
 
-This is a barebones JS library similar to jQuery
+This is a simple JS library similar to jQuery
 
 Nyaaaaaa >w<
