@@ -17,14 +17,15 @@
 
 class bt {
     constructor(element) {
+            var el;
             switch (element.charAt(0)) {
                 case '#':
-                    element.removeCharAt(0);
-                    this.el = document.getElementById(element);
+                    var to_be_got = element.replace(/#/g, "");
+                    this.el = document.getElementById(to_be_got);
                 break;
             
                 case '.':
-                    element.removeCharAt(0);
+                    var to_be_got = element.replace(/./g, "");
                     this.el = document.getElementsByClassName(element);
                 break;
 
@@ -35,25 +36,25 @@ class bt {
     }
 
     text(input) {
-        el.textContent = input;
+        this.el.textContent = input;
     };
 
     i_html(input) {
-        el.innerHTML = input;
+        this.el.innerHTML = input;
     };
 
     o_html(input) {
-        el.outterHTML = input;
+        this.el.outterHTML = input;
     };
 
     get(what) {
         switch (what) {
                 case 'id':
-                    return el.id;
+                    return this.el.id;
                 break;
 
                 case 'tag':
-                    return el.tagName;
+                    return this.el.tagName;
                 break;
         
                 default:
@@ -104,3 +105,7 @@ class ajax {
         return out;
     };
 };
+
+function $(input) {
+    return new bt(input)
+}
