@@ -15,40 +15,38 @@
 // <https://www.gnu.org/licenses/>.
 // E-Mail: ellieputnam5@gmail.com
 
-function $(element) {
-    var el;
+class bt {
+    constructor(element) {
+            switch (element.charAt(0)) {
+                case '#':
+                    element.removeCharAt(0);
+                    this.el = document.getElementById(element);
+                break;
+            
+                case '.':
+                    element.removeCharAt(0);
+                    this.el = document.getElementsByClassName(element);
+                break;
 
-    var on_load;
+                default:
+                    this.el = document.getElementsByTagName(element);
+                break;
+        };
+    }
 
-    switch (element.charAt(0)) {
-            case '#':
-                el.removeCharAt(0);
-                el = document.getElementById(element);
-            break;
-        
-            case '.':
-                el.removeCharAt(0);
-                el= document.getElementsByClassName(element)
-            break;
-
-            default:
-                el = document.getElementsByTagName(element)
-            break;
+    text(input) {
+        el.textContent = input;
     };
 
-    function text(input) {
-        el.textContent = input
-    };
-
-    function i_html(input) {
+    i_html(input) {
         el.innerHTML = input;
     };
 
-    function o_html(input) {
+    o_html(input) {
         el.outterHTML = input;
     };
 
-    function get(what) {
+    get(what) {
         switch (what) {
                 case 'id':
                     return el.id;
@@ -63,41 +61,46 @@ function $(element) {
                 break;
         }
     };
-
-    window.onload = on_load;
 };
 
-function ajax_get(uri) {
-    var out;
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        out = this.responseText; 
+class ajax {
+    constructor(uri, dat){
+        this.uri = uri;
+        this.dat = dat;
     }
-    xhttp.open("GET", uri, true);
-    xhttp.send();
-    return out;
-};
 
-function ajax_post(uri, dat_type) {
-    var out;
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        out = this.responseText; 
+    get() {
+        var out;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            out = this.responseText; 
+        };
+        xhttp.open("GET", this.uri, true);
+        xhttp.send();
+        return out;
     };
-    xhttp.open("POST", uri, true);
-    xhttp.setRequestHeader("Content-type", dat_type);
-    xhttp.send();
-    return out;
-};
 
-function ajax_forum(uri, data) {
-    var out;
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        out = this.responseText; 
+    post() {
+        var out;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            out = this.responseText; 
+        };
+        xhttp.open("POST", this.uri);
+        xhttp.setRequestHeader("Content-type", this.dat);
+        xhttp.send();
+        return out;
     };
-    xhttp.open("POST", uri, true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(data);
-    return out;
+
+    forum(uri, data) {
+        var out;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            out = this.responseText; 
+        };
+        xhttp.open("POST", this.uri, true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
+        return out;
+    };
 };
