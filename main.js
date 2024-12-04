@@ -60,7 +60,7 @@ class bt {
                 default:
                     return;
                 break;
-        }
+        };
     };
 };
 
@@ -107,5 +107,5 @@ class ajax {
 };
 
 function $(input) {
-    return new bt(input)
-}
+    return new bt(input);
+};
